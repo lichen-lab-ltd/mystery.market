@@ -439,7 +439,7 @@ contract MysteryBoxSales is ERC721 {
         require(_to != address(0), "token does not exist");
         require(_from != address(0), "from is zero address");
         address operator = operators[_tokenId];
-        require(msg.sender == _from || operatorsForAll[_from][_to] || msg.sender == operator, "not approved");
+        require(msg.sender == _from || operatorsForAll[_from][msg.sender] || msg.sender == operator, "not approved");
         (uint256 saleId, uint256 participantIndex) = _splitID(_tokenId);
         require(sales[saleId].participants[participantIndex] == _from, "current owner != _from");
         sales[saleId].participants[participantIndex] = _to;
